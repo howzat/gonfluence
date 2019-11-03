@@ -1,0 +1,13 @@
+application-local.conf
+/.classpath
+/.idea
+/.idea_modules
+/.project
+/.settings
+/RUNNING_PID
+credentials.yaml
+logs
+project/target
+target
+/.DS_Store
+*.code-workspace
