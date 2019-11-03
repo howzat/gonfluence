@@ -2,34 +2,34 @@ package filtering
 
 import "fmt"
 
-func Any(vs []string, f func(string) bool) bool {
+type StringPredicate = func(string) bool
+
+func Any(vs []string, fn StringPredicate) bool {
 	for _, v := range vs {
-		if f(v) {
+		if fn(v) {
 			return true
 		}
 	}
 	return false
 }
 
-func Matching(vs []string, predicate func(string) bool) []string {
+func Matching(vs []string, fn StringPredicate) []string {
 	vsf := make([]string, 0)
 	for _, v := range vs {
-		if predicate(v) {
-			fmt.Printf("included element Matching predicate [%q]\n", v)
+		if fn(v) {
+			fmt.Printf("included element Matching StringPredicate [%q]\n", v)
 			vsf = append(vsf, v)
 		}
 	}
 	return vsf
 }
 
-func NotMatching(vs []string, predicate func(string) bool) []string {
+func NotMatching(vs []string, fn StringPredicate) []string {
 	vsf := make([]string, 0)
 	for _, v := range vs {
-		if !predicate(v) {
-			fmt.Printf("included element NotMatching predicate [%q]\n", v)
+		if !fn(v) {
 			vsf = append(vsf, v)
 		}
 	}
 	return vsf
 }
-

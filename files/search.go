@@ -3,35 +3,57 @@ package files
 import (
 	"errors"
 	"fmt"
+	"gg.gov.revenue.gonfluence/configuration"
 	"gg.gov.revenue.gonfluence/files/filtering"
 	"github.com/spf13/afero"
 	"os"
 	"path/filepath"
 	"strings"
-
 )
 
 type Result struct {
-	Locations [] string
+	Locations []string
 }
 
-func isHiddenDirectory(dir string) bool {
-	return strings.HasPrefix(dir, ".")
-}
+const HiddenFilePrefix = "."
+const PathDelimiter = "/"
 
 func IsWithinHiddenDir(path string) bool {
-	dir, _ := filepath.Split(path)
-	return filtering.Any(strings.Split(dir, "/"), isHiddenDirectory)
+
+	predicate := func(pathPart string) bool {
+		return strings.HasPrefix(pathPart, HiddenFilePrefix)
+	}
+
+	dirs, _ := filepath.Split(path)
+	return filtering.Any(strings.Split(dirs, PathDelimiter), predicate)
 }
 
-func Search(basePath string, fs afero.Fs)  (Result, error) {
+func PathContainsDir(path string, excluded []string) bool {
+
+	makePredicate := func(excludedDirs []string) filtering.StringPredicate {
+		return func(dir string) bool {
+			var ed = excludedDirs
+			if "" == dir {
+				return false
+			} else {
+				return filtering.Any(ed, func(excluded string) bool {
+					return excluded == dir
+				})
+			}
+		}
+	}
+
+	return filtering.Any(strings.Split(path, "/"), makePredicate(excluded))
+}
+
+func Search(config configuration.Configuration, fs afero.Fs) (Result, error) {
 
 	results := make([]string, 0)
 	emptyResult := Result{results}
 
-	var exists, _ = afero.DirExists(fs, basePath)
+	var exists, _ = afero.DirExists(fs, config.BaseDir)
 	if !exists {
-		return emptyResult, errors.New(fmt.Sprintf("The basePath [%s] does not exits", basePath))
+		return emptyResult, errors.New(fmt.Sprintf("The basePath [%s] does not exits", config.BaseDir))
 	}
 
 	walker := func(path string, info os.FileInfo, e error) error {
@@ -39,14 +61,14 @@ func Search(basePath string, fs afero.Fs)  (Result, error) {
 			return e
 		}
 
-		if filepath.Ext(path) == ".md" {
+		if filepath.Ext(path) == ".md" && !PathContainsDir(path, config.Exclusions) {
 			results = append(results, path)
 		}
 
 		return nil
 	}
 
-	err := afero.Walk(fs, basePath, walker)
+	err := afero.Walk(fs, config.BaseDir, walker)
 	if err != nil {
 		return emptyResult, errors.New(fmt.Sprintf("failed to traverse file system [%w]\n", err))
 	}

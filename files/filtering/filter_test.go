@@ -11,7 +11,7 @@ func TestMatching(t *testing.T) {
 	overThreeChars := func(s string) bool { return len(s) > 3 }
 	matchingNames := filtering.Matching([]string{"foo", "bar", "bazz", "quxxx"}, overThreeChars)
 
-	assert.Equal(t,  matchingNames, []string{"bazz", "quxxx"})
+	assert.Equal(t, matchingNames, []string{"bazz", "quxxx"})
 }
 
 func TestNotMatching(t *testing.T) {
@@ -19,7 +19,7 @@ func TestNotMatching(t *testing.T) {
 	overThreeChars := func(s string) bool { return len(s) > 3 }
 	matchingNames := filtering.NotMatching([]string{"foo", "bar", "bazz", "quxxx"}, overThreeChars)
 
-	assert.Equal(t,  matchingNames, []string{"foo", "bar"})
+	assert.Equal(t, matchingNames, []string{"foo", "bar"})
 }
 
 func TestAny(t *testing.T) {
@@ -29,5 +29,5 @@ func TestAny(t *testing.T) {
 	overSixChars := func(s string) bool { return len(s) > 6 }
 
 	assert.True(t, filtering.Any(names, overThreeChars))
-	assert.False(t,  filtering.Any(names, overSixChars))
+	assert.False(t, filtering.Any(names, overSixChars))
 }
