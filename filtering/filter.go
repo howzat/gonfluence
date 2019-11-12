@@ -33,3 +33,28 @@ func NotMatching(vs []string, fn StringPredicate) []string {
 	}
 	return vsf
 }
+
+func FirstMatching(vs []string, fn StringPredicate) string {
+	for _, v := range vs {
+		if fn(v) {
+			return v
+		}
+	}
+	return ""
+}
+
+func Distinct(vs []string) []string {
+
+	var instances = make(map[string]string)
+	var results []string
+
+	for _, key := range vs {
+		_, ok := instances[key]
+		if !ok {
+			instances[key] = key
+			results = append(results, key)
+		}
+	}
+
+	return results
+}

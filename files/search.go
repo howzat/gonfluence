@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"gg.gov.revenue.gonfluence/configuration"
-	"gg.gov.revenue.gonfluence/files/filtering"
+	"gg.gov.revenue.gonfluence/filtering"
 	"github.com/spf13/afero"
 	"os"
 	"path/filepath"
@@ -49,7 +49,7 @@ func PathContainsDir(path string, excluded []string) bool {
 func Search(config configuration.Configuration, fs afero.Fs) (Result, error) {
 
 	results := make([]string, 0)
-	emptyResult := Result{results}
+	emptyResult := Result{}
 
 	var exists, _ = afero.DirExists(fs, config.BaseDir)
 	if !exists {
@@ -74,5 +74,6 @@ func Search(config configuration.Configuration, fs afero.Fs) (Result, error) {
 	}
 
 	visibleFiles := filtering.NotMatching(results, IsWithinHiddenDir)
+
 	return Result{visibleFiles}, nil
 }

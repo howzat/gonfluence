@@ -1,7 +1,7 @@
 package filtering_test
 
 import (
-	"gg.gov.revenue.gonfluence/files/filtering"
+	"gg.gov.revenue.gonfluence/filtering"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -30,4 +30,12 @@ func TestAny(t *testing.T) {
 
 	assert.True(t, filtering.Any(names, overThreeChars))
 	assert.False(t, filtering.Any(names, overSixChars))
+}
+
+func TestDistinct(t *testing.T) {
+	names := []string{"foo", "foo", "foo", "bar", "bazz", "quxxx", "bar", "bazz", "quxxx"}
+	dnames := []string{"foo", "bar", "bazz", "quxxx"}
+
+	assert.Equal(t, 4, len(filtering.Distinct(names)))
+	assert.Equal(t, dnames, filtering.Distinct(names))
 }
