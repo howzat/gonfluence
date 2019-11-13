@@ -8,9 +8,8 @@ import (
 )
 
 type Configuration struct {
-	Exclusions               []string
-	ExcludeHiddenDirectories bool
-	BaseDir                  string
+	Exclusions []string
+	BaseDir    string
 }
 
 func ReadConfiguration(filePath string) Configuration {

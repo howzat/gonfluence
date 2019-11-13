@@ -20,7 +20,7 @@ func (suite *SearchTestSuite) SetupTest() {
 	var appFS = afero.NewMemMapFs()
 	_ = appFS.MkdirAll("src", 0755)
 	suite.fs = appFS
-	suite.config = configuration.Configuration{[]string{}, true, "."}
+	suite.config = configuration.Configuration{Exclusions: []string{}, BaseDir: "."}
 }
 
 func TestFileSearchTestSuite(t *testing.T) {
@@ -33,15 +33,14 @@ func (suite *SearchTestSuite) TestSearch() {
 	_ = afero.WriteFile(suite.fs, "src/root-file.md", []byte("root file contents"), 0644)
 	_ = afero.WriteFile(suite.fs, "src/a-directory/a-file.md", []byte("a file contents"), 0644)
 
-	var result, err = files.Search(suite.config, suite.fs)
+	var result, err = files.Search(suite.config.BaseDir, suite.config.Exclusions, suite.fs)
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), 2, len(result.Locations))
 }
 
 func (suite *SearchTestSuite) TestBadBasePath() {
 
-	config := configuration.Configuration{BaseDir: "idontexist"}
-	var _, err = files.Search(config, suite.fs)
+	var _, err = files.Search("idontexist", suite.config.Exclusions, suite.fs)
 
 	if assert.NotNil(suite.T(), err) {
 		assert.Equal(suite.T(), "The basePath [idontexist] does not exits", err.Error())
@@ -53,7 +52,7 @@ func (suite *SearchTestSuite) TestDotFilesAreIgnored() {
 	_ = suite.fs.MkdirAll("src/.hidden-directory", 0755)
 	_ = afero.WriteFile(suite.fs, "src/.hidden-directory/hidden-file.md", []byte("this file should not be found"), 0644)
 
-	var result, _ = files.Search(suite.config, suite.fs)
+	var result, _ = files.Search(suite.config.BaseDir, suite.config.Exclusions, suite.fs)
 	assert.Equal(suite.T(), 0, len(result.Locations), result.Locations)
 }
 

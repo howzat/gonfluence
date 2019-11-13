@@ -14,7 +14,7 @@ type ProjectNames struct {
 
 type SearchFn = func() []*files.ProjectMarkdownFile
 
-func NewProjectPage(t *template.Template, findMarkdownFiles SearchFn) template.HTML {
+func NewProjectsPage(t *template.Template, findMarkdownFiles SearchFn) template.HTML {
 
 	var projectDirectories = FindProjectDirectories(findMarkdownFiles)
 	var buf strings.Builder

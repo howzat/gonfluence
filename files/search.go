@@ -3,7 +3,6 @@ package files
 import (
 	"errors"
 	"fmt"
-	"gg.gov.revenue.gonfluence/configuration"
 	"gg.gov.revenue.gonfluence/filtering"
 	"github.com/spf13/afero"
 	"os"
@@ -46,14 +45,14 @@ func PathContainsDir(path string, excluded []string) bool {
 	return filtering.Any(strings.Split(path, "/"), makePredicate(excluded))
 }
 
-func Search(config configuration.Configuration, fs afero.Fs) (Result, error) {
+func Search(baseDir string, exclusions []string, fs afero.Fs) (Result, error) {
 
 	results := make([]string, 0)
 	emptyResult := Result{}
 
-	var exists, _ = afero.DirExists(fs, config.BaseDir)
+	var exists, _ = afero.DirExists(fs, baseDir)
 	if !exists {
-		return emptyResult, errors.New(fmt.Sprintf("The basePath [%s] does not exits", config.BaseDir))
+		return emptyResult, errors.New(fmt.Sprintf("The basePath [%s] does not exits", baseDir))
 	}
 
 	walker := func(path string, info os.FileInfo, e error) error {
@@ -61,14 +60,14 @@ func Search(config configuration.Configuration, fs afero.Fs) (Result, error) {
 			return e
 		}
 
-		if filepath.Ext(path) == ".md" && !PathContainsDir(path, config.Exclusions) {
+		if filepath.Ext(path) == ".md" && !PathContainsDir(path, exclusions) {
 			results = append(results, path)
 		}
 
 		return nil
 	}
 
-	err := afero.Walk(fs, config.BaseDir, walker)
+	err := afero.Walk(fs, baseDir, walker)
 	if err != nil {
 		return emptyResult, errors.New(fmt.Sprintf("failed to traverse file system [%w]\n", err))
 	}

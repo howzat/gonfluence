@@ -36,18 +36,6 @@ func TestConfigTestSuite(t *testing.T) {
 	suite.Run(t, new(ConfigTestSuite))
 }
 
-func (suite *ConfigTestSuite) TestParseExcludeHiddenFiles() {
-
-	config := suite.newConfigurationWithContents([]byte("{ \"excludeHiddenDirectories\" : true }"))
-	assert.Equal(suite.T(), true, config.ExcludeHiddenDirectories, config.ExcludeHiddenDirectories)
-}
-
-func (suite *ConfigTestSuite) TestParseDontExcludeHiddenFiles() {
-
-	config := suite.newConfigurationWithContents([]byte("{ \"excludeHidden\" : false }"))
-	assert.Equal(suite.T(), false, config.ExcludeHiddenDirectories, config.ExcludeHiddenDirectories)
-}
-
 func (suite *ConfigTestSuite) TestParseExclusions() {
 
 	config := suite.newConfigurationWithContents([]byte("{ \"exclusions\" : [\"a\", \"b\"]}"))

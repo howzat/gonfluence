@@ -1,5 +1,4 @@
 {
-  "excludeHiddenDirectories": true,
   "baseDir" : "/Users/benoit/projects/sog",
   "exclusions" : [
     "helm-charts",

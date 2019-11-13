@@ -28,7 +28,7 @@ func (suite ProjectsPageTestSuite) TestProjectsPageCanGroupBy() {
 
 	t := template.Must(template.New("tmpl").Parse("{{range .}}{{.}},{{end}}"))
 
-	f := NewProjectPage(t, func() []*files.ProjectMarkdownFile { return fs })
+	f := NewProjectsPage(t, func() []*files.ProjectMarkdownFile { return fs })
 
 	assert.Equal(suite.T(), template.HTML("project-0,project-1,project-2,"), f)
 }
