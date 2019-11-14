@@ -27,8 +27,7 @@ func (suite ProjectPageTestSuite) TestProjectPageListsAllFoundFiles() {
 		})
 	}
 
-	t := template.Must(template.New("tmpl").Parse("{{range .}}{{.Filename}},{{end}}"))
-
-	f := NewProjectPage(t, func() []*files.ProjectMarkdownFile { return fs })
-	assert.Equal(suite.T(), template.HTML("markdown-0,markdown-1,markdown-2,"), f)
+	t := template.Must(template.New("tmpl").Parse("{{.ProjectName}},{{range .Files}}{{.Filename}},{{end}}"))
+	f := NewProjectPage(t, ProjectPage{fs, "name"})
+	assert.Equal(suite.T(), template.HTML("name,markdown-0,markdown-1,markdown-2,"), f)
 }

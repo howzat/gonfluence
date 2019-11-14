@@ -12,11 +12,9 @@ type ProjectPage struct {
 	ProjectName string
 }
 
-func NewProjectPage(t *template.Template, projectName string, findMarkdownFiles SearchFn) template.HTML {
+func NewProjectPage(t *template.Template, page ProjectPage) template.HTML {
 
 	var buf strings.Builder
-
-	page := ProjectPage{findMarkdownFiles(), projectName}
 	err := t.Execute(&buf, page)
 
 	if err != nil {

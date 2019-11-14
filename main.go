@@ -55,11 +55,15 @@ func projectPageHandler(config configuration.Configuration) HttpHandler {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		templ, _ := template.ParseFiles("site/" + ProjectPageTemplate)
-		project := mux.Vars(r)["project"]
-		log.Printf("serving files under project: %q\n", project)
-		html := pages.NewProjectPage(templ, project, func() []*files.ProjectMarkdownFile {
-			return findMarkdownFiles(config.BaseDir + "/" + project, config.Exclusions)
-		})
+		projectName := mux.Vars(r)["project"]
+		log.Printf("serving files under project: %q\n", projectName)
+
+		project := pages.ProjectPage{
+			Files:       findMarkdownFiles(config.BaseDir + "/" + projectName, config.Exclusions),
+			ProjectName: projectName,
+		}
+
+		html := pages.NewProjectPage(templ, project)
 
 		_, execute := fmt.Fprintf(w, string(html))
 		if execute != nil {

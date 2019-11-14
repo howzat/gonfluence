@@ -8,10 +8,6 @@ import (
 	"strings"
 )
 
-type ProjectNames struct {
-	Names []string
-}
-
 type SearchFn = func() []*files.ProjectMarkdownFile
 
 func NewProjectsPage(t *template.Template, findMarkdownFiles SearchFn) template.HTML {
@@ -35,4 +31,39 @@ func FindProjectDirectories(fn SearchFn) []string {
 	}
 
 	return filtering.Distinct(projects)
+}
+
+
+
+type Project struct {
+	Name string
+	Files []files.ProjectMarkdownFile
+}
+
+type Projects struct {
+	Projects []Project
+}
+
+func FindProjects(fn SearchFn) Projects {
+
+	projectsAndFiles := make(map[string][]files.ProjectMarkdownFile)
+
+	for _, mdFile := range fn() {
+		mdFiles, ok := projectsAndFiles[mdFile.ProjectName]
+		if !ok {
+			projectsAndFiles[mdFile.ProjectName] = append(mdFiles, *mdFile)
+		} else {
+			markdownFiles := make([]files.ProjectMarkdownFile, 1)
+			projectsAndFiles[mdFile.ProjectName] = append(markdownFiles, *mdFile)
+		}
+	}
+
+	var ppp = make([]Project, 0)
+
+	for k,v := range projectsAndFiles {
+		ppp = append(ppp, Project{Name:k, Files:v})
+	}
+
+
+	return Projects{ppp}
 }
