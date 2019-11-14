@@ -3,6 +3,7 @@ package configuration
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 
 	"github.com/spf13/afero"
 )
@@ -23,7 +24,7 @@ func parseConfig(file afero.File) Configuration {
 	conf := Configuration{}
 	err := decoder.Decode(&conf)
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Printf(fmt.Sprintf("error: %e", err))
 	}
 
 	return conf

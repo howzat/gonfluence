@@ -32,6 +32,9 @@ a {
 
 nav {
     background: lightgray;
+    width: 100vw;
+    margin: 0px;
+    padding: 5px;
     overflow: hidden;
 }
 

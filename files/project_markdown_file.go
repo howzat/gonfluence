@@ -35,6 +35,10 @@ func NewProjectMarkdownFile(path string, baseDirectory string) (*ProjectMarkdown
 			return elem != ""
 		})
 
+	if dir == "/" {
+		dir = ""
+	}
+
 	page := &ProjectMarkdownFile{
 		AbsolutePath: absolutePath,
 		ProjectName:  name,

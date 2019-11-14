@@ -13,18 +13,25 @@
 
 <nav>
     <ul>
-        <li><a href=""><i class="fa fa-home" style="font-size: x-large"></i></a></li>
+        <li><a href="/gonfluence/projects">projects</a></li>
+        <li><a href="#">{{.ProjectName}}</a></li>
     </ul>
 </nav>
 
 <div class="outer-div">
     <div class="inner-div flex-item">
         <article class="markdown-body entry-content" style="padding: 30px;">
-            <h1>Discovered Projects</h1>
+            <h1>{{.ProjectName}}</h1>
 
-            <ul class="cols">
-                {{range .}}
-                    <li><a href="/gonfluence/projects/{{.}}">{{.}}</a></li>
+            <ul>
+                {{range .Files}}
+                    <li>
+                        {{if .ProjectPath}}
+                            {{.ProjectPath}}{{.Filename}}
+                        {{else}}
+                           {{.Filename}}
+                        {{end}}
+                    </li>
                 {{end}}
             </ul>
         </article>

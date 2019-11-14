@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gg.gov.revenue.gonfluence/filtering"
 	"github.com/spf13/afero"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -60,6 +61,8 @@ func Search(baseDir string, exclusions []string, fs afero.Fs) (Result, error) {
 			return e
 		}
 
+
+
 		if filepath.Ext(path) == ".md" && !PathContainsDir(path, exclusions) {
 			results = append(results, path)
 		}
@@ -73,6 +76,6 @@ func Search(baseDir string, exclusions []string, fs afero.Fs) (Result, error) {
 	}
 
 	visibleFiles := filtering.NotMatching(results, IsWithinHiddenDir)
-
+	log.Printf("visible markdown files %v (excluded files %v)", len(visibleFiles), len(results)-len(visibleFiles))
 	return Result{visibleFiles}, nil
 }

@@ -9,24 +9,12 @@ import (
 	"github.com/shurcooL/github_flavored_markdown/gfmstyle"
 	"github.com/spf13/afero"
 	"html/template"
+	"log"
 	"net/http"
 )
 
-type MyHandler = func(http.ResponseWriter, *http.Request)
+type HttpHandler = func(http.ResponseWriter, *http.Request)
 
-func serveContent(content []byte, t *template.Template) MyHandler {
-
-	return func(w http.ResponseWriter, r *http.Request) {
-		_ = t.Execute(w, template.HTML(string(content)))
-	}
-}
-
-func servePage(t template.HTML) MyHandler {
-
-	return func(w http.ResponseWriter, r *http.Request) {
-		_, _ = fmt.Fprintf(w, string(t))
-	}
-}
 
 const ProjectsPageTemplate = "projects-page-template.html"
 const ProjectPageTemplate = "project-page-template.html"
@@ -34,6 +22,9 @@ const ProjectPageTemplate = "project-page-template.html"
 func main() {
 
 	config := configuration.ReadConfiguration("gonfluence.json")
+
+	filesCache := findMarkdownFiles(config.BaseDir, config.Exclusions)
+	files := func() []*files.ProjectMarkdownFile {return filesCache}
 	//searchResult := findMarkdownFiles(config)
 
 	//var output = github_flavored_markdown.Markdown(projectFiles[0].Read())
@@ -44,21 +35,11 @@ func main() {
 	router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(gfmstyle.Assets)))
 	router.Path("/gonfluence").Handler(http.RedirectHandler("/gonfluence/projects", 302))
 
-	projectsTemplate, _ := template.ParseFiles("site/" + ProjectsPageTemplate)
-	projectsPage := pages.NewProjectsPage(projectsTemplate, func() []*files.ProjectMarkdownFile {
-		return findMarkdownFiles(config.BaseDir, config.Exclusions)
-	})
-
-	router.HandleFunc("/gonfluence/projects", servePage(projectsPage)).
+	router.HandleFunc("/gonfluence/projects", projectsPageHandler(config, files)).
 		Methods("GET").
 		Name("Projects")
 
-	projectTemplate, _ := template.ParseFiles("site/" + ProjectPageTemplate)
-	projectPage := pages.NewProjectsPage(projectTemplate, func() []*files.ProjectMarkdownFile {
-		return findMarkdownFiles(config.BaseDir, config.Exclusions)
-	})
-
-	router.HandleFunc("/gonfluence/projects/{project}", servePage(projectPage)).
+	router.HandleFunc("/gonfluence/projects/{project}", projectPageHandler(config)).
 		Methods("GET").
 		Name("Project")
 
@@ -67,11 +48,42 @@ func main() {
 		Handler: router,
 	}
 
-	server.ListenAndServe()
+	log.Fatal(server.ListenAndServe())
+}
+
+func projectPageHandler(config configuration.Configuration) HttpHandler {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		templ, _ := template.ParseFiles("site/" + ProjectPageTemplate)
+		project := mux.Vars(r)["project"]
+		log.Printf("serving files under project: %q\n", project)
+		html := pages.NewProjectPage(templ, project, func() []*files.ProjectMarkdownFile {
+			return findMarkdownFiles(config.BaseDir + "/" + project, config.Exclusions)
+		})
+
+		_, execute := fmt.Fprintf(w, string(html))
+		if execute != nil {
+			log.Panicln(execute)
+		}
+	}
+}
+
+func projectsPageHandler(config configuration.Configuration, files func() []*files.ProjectMarkdownFile) HttpHandler {
+	return func(w http.ResponseWriter, r *http.Request) {
+		projectsTemplate, _ := template.ParseFiles("site/" + ProjectsPageTemplate)
+		html := pages.NewProjectsPage(projectsTemplate, files)
+
+		_, execute := fmt.Fprintf(w, string(html))
+		if execute != nil {
+			log.Panicln(execute)
+		}
+
+	}
 }
 
 func findMarkdownFiles(baseDir string, exclusions []string) []*files.ProjectMarkdownFile {
 
+	log.Printf("looking for markdown files in %q with exclusions [%q]\n", baseDir, exclusions)
 	result, err := files.Search(baseDir, exclusions, afero.NewReadOnlyFs(afero.NewOsFs()))
 	if err != nil {
 		panic(fmt.Errorf("failed to initialise Gonfluence [%w]", err))
@@ -80,9 +92,9 @@ func findMarkdownFiles(baseDir string, exclusions []string) []*files.ProjectMark
 	var projectFiles []*files.ProjectMarkdownFile
 
 	for _, f := range result.Locations {
-		file, e2 := files.NewProjectMarkdownFile(f, baseDir)
-		if e2 != nil {
-			panic(fmt.Errorf("failed to create a representation of the discovered markdown file '%s' [%w]", f, e2))
+		file, e := files.NewProjectMarkdownFile(f, baseDir)
+		if e != nil {
+			panic(fmt.Errorf("failed to create a representation of the discovered markdown file '%s' [%w]", f, e))
 		}
 		projectFiles = append(projectFiles, file)
 	}

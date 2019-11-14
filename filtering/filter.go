@@ -1,6 +1,8 @@
 package filtering
 
-import "fmt"
+import (
+	"log"
+)
 
 type StringPredicate = func(string) bool
 
@@ -17,7 +19,7 @@ func Matching(vs []string, fn StringPredicate) []string {
 	vsf := make([]string, 0)
 	for _, v := range vs {
 		if fn(v) {
-			fmt.Printf("included element Matching StringPredicate [%q]\n", v)
+			log.Printf("included element Matching StringPredicate [%q]\n", v)
 			vsf = append(vsf, v)
 		}
 	}
