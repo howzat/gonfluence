@@ -16,7 +16,6 @@ import (
 type HttpHandler = func(http.ResponseWriter, *http.Request)
 
 const ProjectsPageTemplate = "projects-page-template.html"
-const ProjectsPageTemplate2 = "projects-page-template2.html"
 const ProjectPageTemplate = "project-page-template.html"
 
 func main() {
@@ -74,7 +73,7 @@ func projectPageHandler(config configuration.Configuration) HttpHandler {
 
 func projectsPageHandler(config configuration.Configuration, files func() []*files.MarkdownFile) HttpHandler {
 	return func(w http.ResponseWriter, r *http.Request) {
-		projectsTemplate, _ := template.ParseFiles("site/" + ProjectsPageTemplate2)
+		projectsTemplate, _ := template.ParseFiles("site/" + ProjectsPageTemplate)
 		html := pages.NewProjectsPage(projectsTemplate, files)
 
 		_, execute := fmt.Fprintf(w, string(html))

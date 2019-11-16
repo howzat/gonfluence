@@ -2,33 +2,27 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="/site/gonfluence.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="/assets/gfm.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="/site/gonfluence.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css"
           type="text/css"/>
+    <link href="/site/gonfluence.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
-<nav>
-    <ul>
-        <li><a href=""><i class="fa fa-home" style="font-size: x-large"></i></a></li>
-    </ul>
-</nav>
-
-<div class="outer-div">
-    <div class="inner-div flex-item">
-        <article class="markdown-body entry-content" style="padding: 30px;">
-            <h1>Discovered Projects</h1>
-
-            <ul class="cols">
-                {{range .}}
-                    <li><a href="/gonfluence/projects/{{.}}">{{.}}</a></li>
-                {{end}}
-            </ul>
-        </article>
-    </div>
+<h1>Discovered Projects</h1>
+<div class="grid">
+    {{range $name, $project := .Projects}}
+        <div class="inner-div">
+            <h3>{{$name}}</h3>
+            {{range $md := $project.Files}}
+                <ul>
+                    <li><a href="#">{{$md.ProjectPath}}{{$md.Filename}}</a></li>
+                </ul>
+            {{end}}
+        </div>
+    {{end}}
 </div>
 </body>
 </html>
