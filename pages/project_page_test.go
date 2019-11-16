@@ -19,10 +19,10 @@ func TestProjectPageTestSuite(t *testing.T) {
 
 func (suite ProjectPageTestSuite) TestProjectPageListsAllFoundFiles() {
 
-	var fs []*files.ProjectMarkdownFile
+	var fs []*files.MarkdownFile
 	for i := 0; i < 3; i++ {
-		fs = append(fs, &files.ProjectMarkdownFile{
-			Filename: "markdown-" + strconv.Itoa(i),
+		fs = append(fs, &files.MarkdownFile{
+			Filename:    "markdown-" + strconv.Itoa(i),
 			ProjectName: "project-1",
 		})
 	}

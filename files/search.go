@@ -61,8 +61,6 @@ func Search(baseDir string, exclusions []string, fs afero.Fs) (Result, error) {
 			return e
 		}
 
-
-
 		if filepath.Ext(path) == ".md" && !PathContainsDir(path, exclusions) {
 			results = append(results, path)
 		}

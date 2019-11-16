@@ -5,7 +5,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"html/template"
-	"strconv"
 	"testing"
 )
 
@@ -19,16 +18,17 @@ func TestProjectsPageTestSuite(t *testing.T) {
 
 func (suite ProjectsPageTestSuite) TestProjectsPageCanGroupBy() {
 
-	var fs []*files.ProjectMarkdownFile
-	for i := 0; i < 3; i++ {
-		fs = append(fs, &files.ProjectMarkdownFile{
-			ProjectName: "project-" + strconv.Itoa(i),
-		})
-	}
+	var fs []*files.MarkdownFile
+	fs = append(fs, &files.MarkdownFile{
+		ProjectPath:  "theProjectPath",
+		AbsolutePath: "theAbsolutePath",
+		ProjectName:  "theProjectName",
+		Filename:     "theFile",
+	})
 
-	t := template.Must(template.New("tmpl").Parse("{{range .}}{{.}},{{end}}"))
+	t := template.Must(template.New("tmpl").Parse("{{range .Projects}}{{.}}{{end}}"))
 
-	f := NewProjectsPage(t, func() []*files.ProjectMarkdownFile { return fs })
+	f := NewProjectsPage(t, func() []*files.MarkdownFile { return fs })
 
-	assert.Equal(suite.T(), template.HTML("project-0,project-1,project-2,"), f)
+	assert.Equal(suite.T(), template.HTML("{theProjectName [{theAbsolutePath theProjectPath theProjectName theFile}]}"), f)
 }

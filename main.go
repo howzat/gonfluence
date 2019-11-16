@@ -15,8 +15,8 @@ import (
 
 type HttpHandler = func(http.ResponseWriter, *http.Request)
 
-
 const ProjectsPageTemplate = "projects-page-template.html"
+const ProjectsPageTemplate2 = "projects-page-template2.html"
 const ProjectPageTemplate = "project-page-template.html"
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 	config := configuration.ReadConfiguration("gonfluence.json")
 
 	filesCache := findMarkdownFiles(config.BaseDir, config.Exclusions)
-	files := func() []*files.ProjectMarkdownFile {return filesCache}
+	files := func() []*files.MarkdownFile { return filesCache }
 	//searchResult := findMarkdownFiles(config)
 
 	//var output = github_flavored_markdown.Markdown(projectFiles[0].Read())
@@ -59,7 +59,7 @@ func projectPageHandler(config configuration.Configuration) HttpHandler {
 		log.Printf("serving files under project: %q\n", projectName)
 
 		project := pages.ProjectPage{
-			Files:       findMarkdownFiles(config.BaseDir + "/" + projectName, config.Exclusions),
+			Files:       findMarkdownFiles(config.BaseDir+"/"+projectName, config.Exclusions),
 			ProjectName: projectName,
 		}
 
@@ -72,9 +72,9 @@ func projectPageHandler(config configuration.Configuration) HttpHandler {
 	}
 }
 
-func projectsPageHandler(config configuration.Configuration, files func() []*files.ProjectMarkdownFile) HttpHandler {
+func projectsPageHandler(config configuration.Configuration, files func() []*files.MarkdownFile) HttpHandler {
 	return func(w http.ResponseWriter, r *http.Request) {
-		projectsTemplate, _ := template.ParseFiles("site/" + ProjectsPageTemplate)
+		projectsTemplate, _ := template.ParseFiles("site/" + ProjectsPageTemplate2)
 		html := pages.NewProjectsPage(projectsTemplate, files)
 
 		_, execute := fmt.Fprintf(w, string(html))
@@ -85,7 +85,7 @@ func projectsPageHandler(config configuration.Configuration, files func() []*fil
 	}
 }
 
-func findMarkdownFiles(baseDir string, exclusions []string) []*files.ProjectMarkdownFile {
+func findMarkdownFiles(baseDir string, exclusions []string) []*files.MarkdownFile {
 
 	log.Printf("looking for markdown files in %q with exclusions [%q]\n", baseDir, exclusions)
 	result, err := files.Search(baseDir, exclusions, afero.NewReadOnlyFs(afero.NewOsFs()))
@@ -93,10 +93,10 @@ func findMarkdownFiles(baseDir string, exclusions []string) []*files.ProjectMark
 		panic(fmt.Errorf("failed to initialise Gonfluence [%w]", err))
 	}
 
-	var projectFiles []*files.ProjectMarkdownFile
+	var projectFiles []*files.MarkdownFile
 
 	for _, f := range result.Locations {
-		file, e := files.NewProjectMarkdownFile(f, baseDir)
+		file, e := files.NewMarkdownFile(f, baseDir)
 		if e != nil {
 			panic(fmt.Errorf("failed to create a representation of the discovered markdown file '%s' [%w]", f, e))
 		}

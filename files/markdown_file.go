@@ -8,18 +8,20 @@ import (
 	"strings"
 )
 
-type ProjectMarkdownFile struct {
+type FindMarkdownsFn = func() []*MarkdownFile
+
+type MarkdownFile struct {
 	AbsolutePath string
 	ProjectPath  string
 	ProjectName  string
 	Filename     string
 }
 
-func (f *ProjectMarkdownFile) Read() []byte {
+func (f *MarkdownFile) Read() []byte {
 	return ReadFile(f.AbsolutePath)
 }
 
-func NewProjectMarkdownFile(path string, baseDirectory string) (*ProjectMarkdownFile, error) {
+func NewMarkdownFile(path string, baseDirectory string) (*MarkdownFile, error) {
 
 	absolutePath, withoutBaseDir, e := definePaths(path, baseDirectory)
 
@@ -39,7 +41,7 @@ func NewProjectMarkdownFile(path string, baseDirectory string) (*ProjectMarkdown
 		dir = ""
 	}
 
-	page := &ProjectMarkdownFile{
+	page := &MarkdownFile{
 		AbsolutePath: absolutePath,
 		ProjectName:  name,
 		ProjectPath:  dir,

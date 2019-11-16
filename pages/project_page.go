@@ -8,7 +8,7 @@ import (
 )
 
 type ProjectPage struct {
-	Files       []*files.ProjectMarkdownFile
+	Files       []*files.MarkdownFile
 	ProjectName string
 }
 
