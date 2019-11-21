@@ -15,10 +15,14 @@
     <div class="content-container">
     {{range $name, $project := .Projects}}
         <div class="project-panel">
-            <h2>{{$name}}</h2>
+            <h2 class="gproject-header">{{$name}}</h2>
             {{range $md := $project.Files}}
                 <ul>
-                    <li><a href="#">{{$md.ProjectPath}}{{$md.Filename}}</a></li>
+                    <li class="glink">
+                        <a href="/gonfluence/projects/page{{$md.ProjectPath}}{{$md.Filename}}" class="ganchor">
+                            {{$md.ProjectPath}}{{$md.Filename}}
+                        </a>
+                    </li>
                 </ul>
             {{end}}
         </div>

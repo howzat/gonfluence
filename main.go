@@ -6,6 +6,7 @@ import (
 	"gg.gov.revenue.gonfluence/files"
 	"gg.gov.revenue.gonfluence/pages"
 	"github.com/gorilla/mux"
+	"github.com/shurcooL/github_flavored_markdown"
 	"github.com/shurcooL/github_flavored_markdown/gfmstyle"
 	"github.com/spf13/afero"
 	"html/template"
@@ -22,13 +23,10 @@ func main() {
 
 	config := configuration.ReadConfiguration("gonfluence.json")
 
-	filesCache := findMarkdownFiles(config.BaseDir, config.Exclusions)
+	var filesCache = findMarkdownFiles(config.BaseDir, config.Exclusions)
 	files := func() []*files.MarkdownFile { return filesCache }
 	//searchResult := findMarkdownFiles(config)
 
-	//var output = github_flavored_markdown.Markdown(projectFiles[0].Read())
-	//projectsTemplate, err := template.ParseFiles("site/body.html")
-	//
 	router := mux.NewRouter()
 	router.PathPrefix("/site/").Handler(http.StripPrefix("/site/", http.FileServer(http.Dir("site"))))
 	router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(gfmstyle.Assets)))
@@ -38,7 +36,7 @@ func main() {
 		Methods("GET").
 		Name("Projects")
 
-	router.HandleFunc("/gonfluence/projects/{project}", projectPageHandler(config)).
+	router.HandleFunc("/gonfluence/projects/page{filepath:.*}", projectPageHandler(filesCache)).
 		Methods("GET").
 		Name("Project")
 
@@ -50,19 +48,17 @@ func main() {
 	log.Fatal(server.ListenAndServe())
 }
 
-func projectPageHandler(config configuration.Configuration) HttpHandler {
+func projectPageHandler(fileCache []*files.MarkdownFile) HttpHandler {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		templ, _ := template.ParseFiles("site/" + ProjectPageTemplate)
-		projectName := mux.Vars(r)["project"]
-		log.Printf("serving files under project: %q\n", projectName)
+		filepath := mux.Vars(r)["filepath"]
+		file := files.FindMarkdownFile(filepath, fileCache)
 
-		project := pages.ProjectPage{
-			Files:       findMarkdownFiles(config.BaseDir+"/"+projectName, config.Exclusions),
-			ProjectName: projectName,
-		}
+		read := file.Read()
+		var markdown = github_flavored_markdown.Markdown(read)
 
-		html := pages.NewProjectPage(templ, project)
+		html := pages.NewProjectPage(templ, markdown)
 
 		_, execute := fmt.Fprintf(w, string(html))
 		if execute != nil {

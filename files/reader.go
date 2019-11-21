@@ -2,6 +2,7 @@ package files
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 )
 
@@ -15,7 +16,8 @@ func ReadFile(filename string) []byte {
 	check(err)
 
 	contents := make([]byte, info.Size())
-	_, err = file.Read(contents)
+
+	contents, err = ioutil.ReadFile(filename)
 	check(err)
 
 	return contents

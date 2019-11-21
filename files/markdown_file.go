@@ -3,6 +3,7 @@ package files
 import (
 	"fmt"
 	"gg.gov.revenue.gonfluence/filtering"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -17,8 +18,22 @@ type MarkdownFile struct {
 	Filename     string
 }
 
+func FindMarkdownFile(path string, files []*MarkdownFile) *MarkdownFile {
+	for _, mdFile := range files {
+		if strings.Contains(mdFile.AbsolutePath, path) {
+			return mdFile
+		}
+	}
+
+	return nil
+}
+
 func (f *MarkdownFile) Read() []byte {
-	return ReadFile(f.AbsolutePath)
+
+	s := f.AbsolutePath
+
+	log.Printf("opening file %v", s)
+	return ReadFile(s)
 }
 
 func NewMarkdownFile(path string, baseDirectory string) (*MarkdownFile, error) {
@@ -41,11 +56,13 @@ func NewMarkdownFile(path string, baseDirectory string) (*MarkdownFile, error) {
 		dir = ""
 	}
 
+	filename := strings.Replace(file, "/", "", 0)
+
 	page := &MarkdownFile{
 		AbsolutePath: absolutePath,
 		ProjectName:  name,
 		ProjectPath:  dir,
-		Filename:     file,
+		Filename:     filename,
 	}
 
 	return page, nil
