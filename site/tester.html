@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            font-size: calc(0.3em + 1vw);
+            --main-font: "Roboto", "Helvetica Neue", Helvetica, sans-serif;
+            --main-bg: #eeeeee;
+        }
+
+        body {
+            box-sizing: border-box;
+            font-family: var(--main-font);
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .project-panel {
+            text-align: left;
+            margin: 0.6em;
+            padding: 0.6em;
+            background-color: #fafafa;
+            border: 1px solid #ececec;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            margin-bottom: 0.4em;
+        }
+
+        .container {
+            text-align: center;
+            border: none;
+        }
+
+        .content-container {
+            border: 1px solid #dadada;
+            text-align: center;
+            background: whitesmoke;
+            margin-top: 2em;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0.2em;
+        }
+
+        a {
+            color: cornflowerblue;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .circle {
+            width: 9em;
+            height: 9em;
+            border-radius: 250px;
+            font-size: 1.1rem;
+            color: #fff;
+            line-height: 9.4em;
+            text-align: center;
+            background: #333333;
+            float: left;
+            margin-left: -1em;
+            margin-top: -4em;
+        }
+
+        .circle {
+            width: 9em;
+            height: 9em;
+            border-radius: 250px;
+            font-size: 1.1rem;
+            color: #fff;
+            line-height: 9.4em;
+            text-align: center;
+            background: #333333;
+            float: left;
+            margin-left: -1em;
+            margin-top: -4em;
+            border-color: gold;
+            border-width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="circle">&nbsp;&nbsp;ۜ ᕕ(´◓⌓◔)ᕗ⁾⁾ۜ</div>
+    <div class="content-container">
+        <div class="project-panel">
+            <h2>account-frontend</h2>
+            <ul>
+                <li><a href="#" class="button-link">/account-frontend/README.md</a></li>
+            </ul>
+            <ul>
+                <li><a href="#" class="button-link">/account-frontend/ci/helm/README.md</a></li>
+            </ul>
+        </div>
+        <div class="project-panel">
+            <h2>aws-amis</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/aws-amis/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/aws-amis/haproxy/test/DEVELOPING.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/aws-amis/haproxy/test/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/aws-amis/haproxy/test/terraform-packer/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>change-employer-frontend</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/change-employer-frontend/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/change-employer-frontend/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>clareti-contract-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/clareti-contract-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>clareti-demo</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/clareti-demo/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>company-tax-contract-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/company-tax-contract-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>company-tax-frontend</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/company-tax-frontend/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/company-tax-frontend/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>company-tax-stubs</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/company-tax-stubs/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/company-tax-stubs/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>concourse-pipelines</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/deploy-test-promote/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/deploy-test-promote/generate-pipelines/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/deployment-stats/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/libraries/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/libraries/build-and-release/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/concourse-pipelines/libraries/generate-library-pipelines/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/microservices/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/microservices/build-and-release/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/microservices/generate-microservice-pipelines/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/concourse-pipelines/set-pipelines/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>corporate-substance</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/corporate-substance/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/corporate-substance/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>dependency-check-settings</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/dependency-check-settings/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>developer-docs</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/developer-docs/Concourse_tips.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/developer-docs/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/developer-docs/RUN_BOOK.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/developer-docs/runbook/alerts/ContainerNotReady.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/developer-docs/runbook/alerts/ITAXUnavailable.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/developer-docs/runbook/alerts/TooManyOpenIdConnectStateMismatches.md</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>developer-tools</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/developer-tools/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>docker-images</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/docker-images/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/docker-images/ci/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>employment</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/employment/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/employment/ci/helm/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/employment/target/universal/stage/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>enrolment</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/enrolment/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/enrolment/ci/helm/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/enrolment/target/universal/stage/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>enrolment-frontend</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/enrolment-frontend/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/enrolment-frontend/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>file-type-detection-library</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/file-type-detection-library/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>hello-world</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/hello-world/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/hello-world/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>hello-world-acceptance-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/hello-world-acceptance-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>hello-world-frontend</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/hello-world-frontend/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/hello-world-frontend/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>hello-world-performance-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/hello-world-performance-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>infrastructure</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/ADDING_IP_TO_WHITELIST.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/architecture/drawings/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/developer/AWS Setup/AWS Vault.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/developer/AWS Setup/Switch Roles Browser
+                        Extension.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/developer/Pact Broker.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/platform/concourse/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/runbook/AllVPNDown.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/runbook/ITAXTunnelDown.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/runbook/ITAXTunnelsDown.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/doc/runbook/VPNAllTunnelsDown.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/kubernetes/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/kubernetes/nonprod/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/kubernetes/nonprod/log-alerting/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/kubernetes/prod/log-alerting/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/secrets/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/secrets/concourse/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/github/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/master/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/infrastructure/terraform/live/master/trust/route53_prod/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/infrastructure/terraform/live/master/trust/vpn_non_prod/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/mongo-atlas/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/nonprod/databases/concourse-blue/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/nonprod/docker_registry/concourse_tasks/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/nonprod/docker_registry/personal/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/nonprod/docker_registry/website/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/nonprod/log-alerting/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/prod/kubernetes/clusters/blue/structure/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/prod/kubernetes/clusters/green/structure/README.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/terraform/live/prod/log-alerting/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/infrastructure/tooling/bin/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>ingress-error-frontend</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/ingress-error-frontend/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/ingress-error-frontend/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>itax-gateway</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/itax-gateway/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/itax-gateway/ci/helm/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/itax-gateway/doc/Javadoc.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>itax-gateway-clareti-integration-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/itax-gateway-clareti-integration-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>itax-gateway-stub</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/itax-gateway-stub/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/itax-gateway-stub/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>jboss-rules-spike</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/jboss-rules-spike/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/jboss-rules-spike/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>local-nginx-config</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/local-nginx-config/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>login-gov-gg-contract-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/login-gov-gg-contract-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>login-stub-frontend</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/login-stub-frontend/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/login-stub-frontend/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>operating-hours</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/operating-hours/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-bootstrap</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-bootstrap/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-camunda-spike</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-camunda-spike/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-camunda-spike/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-component-library</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-component-library/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-config-helpers</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-config-helpers/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-drools-spike</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-drools-spike/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-drools-spike/ci/helm/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-json-helpers</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-json-helpers/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-prometheus-metrics</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-prometheus-metrics/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>play-test-helpers</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/play-test-helpers/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>revenue-service-onboarding</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-service-onboarding/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>revenue-services-acceptance-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-acceptance-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>revenue-services-contract-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-contract-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>revenue-services-performance-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-performance-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>revenue-services-prototypes</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/CHANGELOG.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/CONTRIBUTING.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/adding-css-javascript-and-images.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/backwards-compatibility.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/revenue-services-prototypes/docs/documentation/creating-routes.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/revenue-services-prototypes/docs/documentation/extension-system.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/install/developer-install-instructions.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/install/install-the-kit.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/install/introduction.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/install/requirements.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/install/run-the-kit.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/making-pages.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/principles.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/publishing-on-heroku.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/session.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/revenue-services-prototypes/docs/documentation/setting-up-git.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/revenue-services-prototypes/docs/documentation/tips-and-tricks.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#"
+                       class="button-link">/revenue-services-prototypes/docs/documentation/updating-the-kit.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/usage-data.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/using-notify.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/documentation/using-verify.md</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-prototypes/docs/linting.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>revenue-services-substance-acceptance-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-substance-acceptance-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>revenue-services-substance-performance-tests</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/revenue-services-substance-performance-tests/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>sbt-dependency-check</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/sbt-dependency-check/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>sbt-release</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/sbt-release/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>ssmcreds</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/ssmcreds/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>tax-facade</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/tax-facade/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>tax-identifiers</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/tax-identifiers/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>terraform-modules</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/terraform-modules/README.md</a></li>
+            </ul>
+
+        </div>
+
+        <div class="project-panel">
+            <h2>vpn-check</h2>
+
+            <ul>
+                <li><a href="#" class="button-link">/vpn-check/DEVELOPING.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/vpn-check/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/vpn-check/hoverfly_captures/README.md</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#" class="button-link">/vpn-check/skaffold/README.md</a></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
