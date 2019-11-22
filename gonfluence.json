@@ -2,6 +2,7 @@
   "baseDir" : "/Users/benoit/projects/sog",
   "exclusions" : [
     "helm-charts",
-    "asset-library"
+    "asset-library",
+    "gonfluence"
   ]
 }
